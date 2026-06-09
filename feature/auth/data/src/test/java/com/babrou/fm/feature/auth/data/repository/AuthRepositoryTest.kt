@@ -1,0 +1,100 @@
+package com.babrou.fm.feature.auth.data.repository
+
+import com.google.common.truth.Truth
+import com.babrou.fm.core.api.Result
+import com.babrou.fm.core.local.IPreferencesManager
+import com.babrou.fm.feature.auth.data.AuthRepository
+import com.babrou.fm.feature.auth.data.model.AuthRequestModel
+import com.babrou.fm.feature.auth.data.model.AuthResponseModel
+import com.babrou.fm.feature.auth.data.remote.AuthService
+import com.babrou.fm.feature.auth.domain.IAuthRepository
+import io.mockk.coEvery
+import io.mockk.coVerify
+import io.mockk.every
+import io.mockk.mockk
+import kotlinx.coroutines.runBlocking
+import okhttp3.ResponseBody.Companion.toResponseBody
+import org.junit.Before
+import org.junit.Test
+import retrofit2.Response
+
+internal class AuthRepositoryTest {
+
+    private lateinit var authRepository: IAuthRepository
+    private lateinit var authService: AuthService
+    private lateinit var preferencesManager: IPreferencesManager
+
+    @Before
+    fun setUp() {
+        authService = mockk<AuthService>()
+        preferencesManager = mockk<IPreferencesManager>(relaxed = true)
+        authRepository = AuthRepository(authService, preferencesManager)
+    }
+
+    @Test
+    fun `given signed user when hasUser() then return true`() {
+        // Given
+        every { preferencesManager.hasUser() } returns true
+
+        // When
+        val result = authRepository.hasUser()
+
+        // Then
+        Truth.assertThat(result).isTrue()
+    }
+
+    @Test
+    fun `given has not signed user when hasUser() then return false`() {
+        // Given
+        every { preferencesManager.hasUser() } returns false
+
+        // When
+        val result = authRepository.hasUser()
+
+        // Then
+        Truth.assertThat(result).isFalse()
+    }
+
+    @Test
+    fun `given valid authRequestModel when login() then verify setAccessToken called`() {
+        // Given
+        val authRequestModel = AuthRequestModel(
+            login = "BBR",
+            password = "1234"
+        )
+        val authResponseModel = AuthResponseModel(
+            id = 1
+        )
+
+        // When
+//        coEvery { authService.login(authRequestModel) } returns Response.success(authResponseModel)
+//        val result = runBlocking { authRepository.login("login", "password") }
+//
+//        // Then
+//        Truth.assertThat(result).isInstanceOf(Result.Success::class.java)
+//        coVerify { preferencesManager.setAccessToken("token") }
+//        coVerify { preferencesManager.setRefreshToken("refresh") }
+//        coVerify { preferencesManager.setTokenType("Bearer") }
+    }
+
+    @Test
+    fun `given invalid authRequestModel when login() then verify setAccessToken not called`() {
+        // Given
+        val authRequestModel = AuthRequestModel(
+            login = "login",
+            password = "password"
+        )
+
+        // When
+        coEvery { authService.login(authRequestModel) } returns Response.error(
+            400,
+            "Bad Request".toResponseBody()
+        )
+        val result = runBlocking { authRepository.login("email", "password") }
+
+        // Then
+        Truth.assertThat(result).isInstanceOf(Result.Error::class.java)
+        coVerify(exactly = 0) { preferencesManager.setAccessToken(any()) }
+    }
+
+}

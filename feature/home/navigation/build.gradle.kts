@@ -1,0 +1,17 @@
+plugins {
+    id("fm.android.library")
+    id("fm.android.hilt")
+    id("fm.android.library.compose")
+    alias(libs.plugins.kotlin.serialization)
+}
+
+android {
+    namespace = "com.babrou.fm.feature.home.navigation"
+}
+
+dependencies {
+    implementation(project(":core"))
+    implementation(project(":contract"))
+    implementation(libs.androidx.compose.material.icons.core.android)
+    implementation(libs.kotlinx.serialization.core)
+}

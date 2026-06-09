@@ -1,0 +1,59 @@
+package com.babrou.fm.ui
+
+import androidx.activity.compose.LocalActivity
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation3.runtime.NavEntry
+import androidx.navigation3.ui.NavDisplay
+import com.babrou.fm.MainActivity
+import com.babrou.fm.core.navigation.INavigationManager
+import com.babrou.fm.core.navigation.ScreenRegistry
+import com.babrou.fm.core.theme.component.AppNavigationBar
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AppNavigation(
+    navigationManager: INavigationManager,
+    screenRegistry: ScreenRegistry
+) {
+    val backStack by navigationManager.backStack.collectAsStateWithLifecycle()
+    val currentRoute = backStack.lastOrNull()
+
+    if (currentRoute != null) {
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
+            bottomBar = {
+                if (navigationManager.showBottomBar(currentRoute)) {
+                    AppNavigationBar(
+                        currentRoute = currentRoute,
+                        items = navigationManager.bottomBarItems,
+                        onItemClick = { selected ->
+                            navigationManager.selectTab(selected)
+                        }
+                    )
+                }
+            }
+        ) { paddingValues ->
+            NavDisplay(
+                modifier = Modifier.padding(paddingValues),
+                backStack = backStack,
+                onBack = {
+                    navigationManager.navigateBack()
+                },
+                entryProvider = { key ->
+                    NavEntry(key) {
+                        screenRegistry.ScreenProvider(key, navigationManager)
+                    }
+                }
+            )
+        }
+    } else {
+        (LocalActivity.current as? MainActivity)?.finish()
+    }
+}
