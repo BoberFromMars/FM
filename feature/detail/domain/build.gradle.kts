@@ -9,4 +9,5 @@ android {
 
 dependencies {
     implementation(project(":core"))
+    implementation(project(":feature:list:domain"))
 }

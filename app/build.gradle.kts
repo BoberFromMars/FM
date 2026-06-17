@@ -27,7 +27,8 @@ android {
     buildTypes {
         debug {
             isMinifyEnabled = false
-            isShrinkResources = true
+            //noinspection NotShrinkingResources
+            isShrinkResources = false
             "\"${localProperties.getProperty("BASE_URL_DEBUG")}\""
             buildConfigField(
                 "String",
@@ -71,6 +72,7 @@ dependencies {
     implementation(project(":feature:search:presentation"))
     implementation(project(":feature:splash:navigation"))
     implementation(project(":feature:splash:presentation"))
+    implementation(libs.androidx.appcompat)
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle.runtime.ktx)

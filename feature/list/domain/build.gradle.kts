@@ -10,4 +10,6 @@ android {
 
 dependencies {
     implementation(project(":core"))
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 }

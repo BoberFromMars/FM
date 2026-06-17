@@ -3,7 +3,6 @@ package com.babrou.fm.feature.list.domain
 import com.babrou.fm.core.api.Result
 import com.babrou.fm.feature.list.domain.model.BalanceChangeModel
 import com.babrou.fm.feature.list.domain.model.BalanceTypeModel
-import dagger.Provides
 
 interface IListRepository {
 

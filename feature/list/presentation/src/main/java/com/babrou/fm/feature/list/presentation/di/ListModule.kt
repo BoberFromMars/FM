@@ -13,7 +13,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 internal abstract class ListModule {
     @Binds
-    @Singleton
+    @IntoSet
     abstract fun bindListScreenProvider(
         provider: ListScreenProvider
     ): IScreenProvider

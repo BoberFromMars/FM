@@ -14,7 +14,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "KotlinFinanceManager"
+rootProject.name = "KotlinFinance"
 include(":app")
 include(":core")
 include(":contract")

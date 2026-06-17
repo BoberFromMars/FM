@@ -1,12 +1,8 @@
 package com.babrou.fm.core.models
 
 import com.google.gson.annotations.SerializedName
-import java.time.LocalDateTime
 
-
-data class BalanceChangeResponseModel (
-    @SerializedName("id")
-    val id: Int,
+data class BalanceChangeDboModel (
     @SerializedName("accountId")
     val accountId: Int,
     @SerializedName("changeTypeId")

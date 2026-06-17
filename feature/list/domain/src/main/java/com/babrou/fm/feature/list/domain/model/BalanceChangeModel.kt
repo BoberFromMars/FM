@@ -7,6 +7,6 @@ data class BalanceChangeModel (
     val accountId: Int,
     val changeTypeId: Int,
     val money: Double,
-    val date: LocalDateTime,
+    val date: String,
     val comment: String?
 )

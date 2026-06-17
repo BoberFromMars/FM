@@ -1,5 +1,6 @@
 package com.babrou.fm.feature.list.presentation
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import com.babrou.fm.core.navigation.INavigationItem
 import com.babrou.fm.core.navigation.INavigationManager
@@ -17,8 +18,10 @@ class ListScreenProvider @Inject constructor() : IScreenProvider {
         route: INavigationItem,
         navigationManager: INavigationManager
     ): Boolean {
+        Log.v("LIST CREATION", route.route)
         return when (route) {
             is ListRoute -> {
+                Log.v("PROVIDE SCREEN", "")
                 ListScreen(navigationManager)
                 true
             }

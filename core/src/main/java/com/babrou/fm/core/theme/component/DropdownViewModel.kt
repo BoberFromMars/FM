@@ -32,7 +32,6 @@ class DropdownViewModel(
 //    val listCopy: MutableStateFlow<List<String>> = MutableStateFlow(ddList.toList())
     private var _items: MutableStateFlow<List<DdItem>> = MutableStateFlow(emptyList())
     val ddList: StateFlow<List<DdItem>> = _items.asStateFlow()
-//    private val _items = MutableStateFlow(listOf("Test1","Test2", "LOL"))
     val filteredList: StateFlow<List<DdItem>> = _searchText
         .combine(_items) { search, items ->
             items.filter { it.label.contains(search, ignoreCase = true) }

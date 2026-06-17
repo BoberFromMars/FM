@@ -1,22 +1,22 @@
 package com.babrou.fm.feature.list.presentation.models
 
+import com.babrou.fm.core.theme.component.table.ITablePreviewModel
 import com.babrou.fm.feature.list.domain.model.BalanceChangeModel
 import com.babrou.fm.feature.list.domain.model.BalanceTypeModel
-import java.time.LocalDateTime
 
-data class BalanceChangeUiModel (
+data class BalanceChangeUiModel(
     //BalanceChange fields
     val id: Int,
     val accountId: Int,
     val changeTypeId: Int,
     val money: Double,
-    val date: LocalDateTime,
+    val date: String,
     val comment: String?,
 
     //BalanceTypes fields
     val typeName: String,
     val isIncrement: Boolean
-) {
+): ITablePreviewModel {
     fun getBalanceChange(): BalanceChangeModel {
         return BalanceChangeModel(
             id = this.id,
@@ -35,4 +35,20 @@ data class BalanceChangeUiModel (
             isIncrement = this.isIncrement
         )
     }
+
+    fun getBalanceTableModel() : BalanceChangeTableViewModel {
+        val moneyWithType: Double = if (isIncrement) money else money * -1
+        return BalanceChangeTableViewModel(
+            id = this.id,
+            date = this.date,
+            money = this.money,
+            typeName = this.typeName,
+            comment = this.comment,
+        )
+    }
+
+    override fun getItemId(): Int {
+        return id
+    }
+
 }

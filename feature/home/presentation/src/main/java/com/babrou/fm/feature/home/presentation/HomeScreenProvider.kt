@@ -1,5 +1,6 @@
 package com.babrou.fm.feature.home.presentation
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import com.babrou.fm.core.navigation.INavigationItem
 import com.babrou.fm.core.navigation.INavigationManager
@@ -17,8 +18,10 @@ class HomeScreenProvider @Inject constructor() : IScreenProvider {
         route: INavigationItem,
         navigationManager: INavigationManager
     ): Boolean {
+        Log.v("HOME CREATION", route.route)
         return when (route) {
             is HomeRoute -> {
+                Log.v("PROVIDE HOME", "")
                 HomeScreen(navigationManager)
                 true
             }

@@ -1,7 +1,7 @@
-package com.babrou.fm.feature.list.domain.model
+package com.babrou.fm.feature.list.domain
 
 import com.babrou.fm.core.api.Result
-import com.babrou.fm.feature.list.domain.IListRepository
+import com.babrou.fm.feature.list.domain.model.BalanceTypeModel
 import javax.inject.Inject
 
 class BalanceTypeUseCase @Inject constructor(

@@ -13,4 +13,5 @@ dependencies {
     implementation(project(":contract"))
     implementation(project(":feature:search:domain"))
     implementation(project(":feature:search:navigation"))
+    implementation(libs.androidx.appcompat)
 }

@@ -1,7 +1,6 @@
 package com.babrou.fm.feature.list.data
 
 import com.babrou.fm.core.api.Result
-import com.babrou.fm.core.api.isSuccess
 import com.babrou.fm.core.api.map
 import com.babrou.fm.core.base.BaseRepository
 import com.babrou.fm.core.local.IPreferencesManager
@@ -9,11 +8,9 @@ import com.babrou.fm.feature.list.domain.IListRepository
 import com.babrou.fm.feature.list.data.remote.ListService
 import com.babrou.fm.feature.list.domain.model.BalanceChangeModel
 import com.babrou.fm.feature.list.domain.model.BalanceTypeModel
-import dagger.Provides
-import retrofit2.Response
 import javax.inject.Inject
 
-class ListRepository @Inject constructor (
+internal class ListRepository @Inject constructor (
     private val listService: ListService,
     private val prefs: IPreferencesManager
 ) : BaseRepository(), IListRepository {
@@ -34,6 +31,7 @@ class ListRepository @Inject constructor (
                    comment = a.comment
                )}
             }
+
         return result
     }
 

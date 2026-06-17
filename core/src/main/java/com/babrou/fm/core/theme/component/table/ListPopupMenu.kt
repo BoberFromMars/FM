@@ -1,4 +1,4 @@
-package com.babrou.fm.feature.list.presentation.models
+package com.babrou.fm.core.theme.component.table
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -15,18 +15,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.babrou.fm.core.R
 
 @Composable
 fun ListPopupMenu(
-    balanceChangeId: Int,
+//    balanceChangeId: Int,
     onDeleteDelegate: () -> Unit,
     onEditDelegate: () -> Unit,
 ) {
     var expanded by remember { mutableStateOf(false) }
     Box(
-        modifier = Modifier
-            .padding(16.dp)
+
     ) {
         IconButton(onClick = { expanded = !expanded }) {
             Icon(
@@ -39,11 +40,11 @@ fun ListPopupMenu(
             onDismissRequest = { expanded = false }
         ) {
             DropdownMenuItem(
-                text = { Text("Edit") },
+                text = { Text(stringResource(id = R.string.edit)) },
                 onClick = onEditDelegate
             )
             DropdownMenuItem(
-                text = { Text("Delete") },
+                text = { Text(stringResource(id = R.string.delete)) },
                 onClick = onDeleteDelegate
             )
         }

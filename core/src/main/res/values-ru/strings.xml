@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Котлин финансы</string>
+    <string name="dark_theme">Темная тема</string>
+    <string name="languague">Язык</string>
+    <string name="edit">Изменить</string>
+    <string name="delete">Удалить</string>
+    <string name="date">Дата</string>
+    <string name="comment">Комментарий</string>
+    <string name="confirm_changes">Подтвердить</string>
+    <string name="add_new">Добавить новый</string>
+    <string name="select_account">Выберите аккаунт</string>
+</resources>

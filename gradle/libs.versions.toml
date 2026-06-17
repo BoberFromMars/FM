@@ -48,6 +48,11 @@ material3 = "1.4.0"
 ui = "1.11.2"
 materialIconsCoreAndroid = "1.6.8"
 runtime = "1.11.2"
+foundationLayout = "1.11.2"
+uiGraphics = "1.11.2"
+uiText = "1.11.2"
+foundation = "1.11.2"
+appcompat = "1.7.1"
 
 [libraries]
 # AndroidX Core
@@ -105,6 +110,11 @@ androidx-compose-ui = { group = "androidx.compose.ui", name = "ui", version.ref 
 androidx-compose-material-icons-core-android = { group = "androidx.compose.material", name = "material-icons-core-android", version.ref = "materialIconsCoreAndroid" }
 androidx-compose-material-icons = { group = "androidx.compose.material.icons", name = "material-icons-core" }
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "runtime" }
+androidx-compose-foundation-layout = { group = "androidx.compose.foundation", name = "foundation-layout", version.ref = "foundationLayout" }
+androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics", version.ref = "uiGraphics" }
+androidx-compose-ui-text = { group = "androidx.compose.ui", name = "ui-text", version.ref = "uiText" }
+androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "foundation" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 
 [plugins]
 # Android

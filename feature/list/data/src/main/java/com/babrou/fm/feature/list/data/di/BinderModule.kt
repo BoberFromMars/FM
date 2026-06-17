@@ -13,10 +13,9 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class BinderModule {
+internal abstract class BinderModule {
 
     @Binds
-    @Singleton
     abstract fun bindListRepository(
         list: ListRepository
     ): IListRepository

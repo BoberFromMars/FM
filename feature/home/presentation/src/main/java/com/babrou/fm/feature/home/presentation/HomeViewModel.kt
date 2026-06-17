@@ -27,10 +27,10 @@ internal class HomeViewModel @Inject constructor(
     val uiState = _uiState.asStateFlow()
     private val _accList: MutableStateFlow<List<DdItem>> = MutableStateFlow(emptyList())
     val availableAccountsList: StateFlow<List<DdItem>> = _accList.asStateFlow()
-//    private val _selectedAccount: MutableStateFlow<DdItem?> = MutableStateFlow(null)
-//    val selectedAccount: StateFlow<DdItem?> = _selectedAccount.asStateFlow()
+    private val _selectedAccount: MutableStateFlow<DdItem?> = MutableStateFlow(null)
+    val selectedAccount: StateFlow<DdItem?> = _selectedAccount.asStateFlow()
     fun getAvailableAccounts() {
-        val id = preferencesManager.getUUID()?.toIntOrNull()
+        val id = preferencesManager.getUserId()
         if (id != null) {
             val model = AvailableAccountsRequestModel(id)
             viewModelScope.launch {
@@ -44,12 +44,16 @@ internal class HomeViewModel @Inject constructor(
 //                        shouldNavigateToSplash = true,
 //                        destinationRoute = HomeRoute,
 //                            availableAccountsList = it,
+                            shouldNavigateToList = false,
+                            wasInitialized = true,
                             isLoading = false
                         )
                     }
                     .onError { message, _ ->
                         _uiState.value = HomeUiState(
                             isLoading = false,
+                            shouldNavigateToList = false,
+                            wasInitialized = false,
 //                            availableAccountsList = emptyList(),
 //                        destinationRoute = null,
                             error = message
@@ -63,6 +67,26 @@ internal class HomeViewModel @Inject constructor(
     fun setAccountId(accountId: Int) {
         viewModelScope.launch {
             preferencesManager.setAccountId(accountId)
+        }
+    }
+
+    fun navigateToList () {
+        viewModelScope.launch {
+            _uiState.value = HomeUiState(
+                wasInitialized = true,
+                shouldNavigateToList = true,
+                isLoading = false
+            )
+        }
+    }
+
+    fun updateState() {
+        viewModelScope.launch {
+            _uiState.value = HomeUiState(
+                shouldNavigateToList = false,
+                wasInitialized = true,
+                isLoading = false
+            )
         }
     }
 }

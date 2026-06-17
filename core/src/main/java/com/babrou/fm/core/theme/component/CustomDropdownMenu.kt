@@ -71,12 +71,15 @@ fun CustomDropdownMenu(
     label: String = "",
     helperLabel: String = "",
     ddList: List<DdItem> = emptyList(),
+    onSelectDelegate: (DdItem) -> Unit,
     viewModel: DropdownViewModel = viewModel(),
     ) {
     val searchText by viewModel.searchText.collectAsState()
     val filteredList by viewModel.filteredList.collectAsState()
-    val selection by viewModel.selection.collectAsState()
+//    val selection by viewModel.selection.collectAsState()
+    var selection by remember {mutableStateOf(DdItem())}
     var expanded by remember { mutableStateOf(false) }
+
     viewModel.fillDdList(ddList)
 
     ExposedSearchMenu(
@@ -88,6 +91,8 @@ fun CustomDropdownMenu(
                 text = { Text(item.label) },
                 onClick = {
                     viewModel.onItemSelected(item)
+                    selection = item
+                    onSelectDelegate(item)
                     expanded = false
                 }
             )
